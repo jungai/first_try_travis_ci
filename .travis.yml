@@ -8,3 +8,16 @@ before_install:
 
 script:
   - docker run -e CI=true jungai/testworkflow yarn test
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'ap-southeast-1'
+  app: 'practice-docker'
+  env: 'PracticeDocker-env'
+  bucket_name: 'elasticbeanstalk-ap-southeast-1-269319711875'
+  bucket_path: 'practice-docker'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: '$AWS_SECRET_KEY'
